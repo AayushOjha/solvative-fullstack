@@ -23,8 +23,12 @@ const ShowUser = () => {
         <>
           <UserForm type="update" name={user.name} id={user._id} />
           <div>
-            <button>P5 balance: {user.p5_points}</button>
-            <button>Reward balance: {user.reward_points}</button>
+            <a href={`/${user._id}/p5`}>
+              <button>P5 balance: {user.p5_points}</button>
+            </a>
+            <a href={`/${user._id}/reward`}>
+              <button>Reward balance: {user.reward_points}</button>
+            </a>
           </div>
         </>
       ) : (

@@ -45,3 +45,11 @@ table td {
   background: rgb(255, 255, 255);
   color: rgb(49, 48, 48);
 }
+
+.reward-flex-box {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}

@@ -1,3 +1,4 @@
+import { RewardHistory } from "../models/RewardHistory";
 import { User } from "../models/User";
 import { getUserBalance } from "../utils/helpers/getUserBalance";
 import { ControllerFunction } from "../utils/interfaces/common";
@@ -69,6 +70,32 @@ const update: ControllerFunction = async (req, res) => {
     });
 };
 
-const userController = { create, update, list, index };
+const fetchP5: ControllerFunction = async (req, res) => {
+  const id = req.params.id;
+  RewardHistory.find({ given_by: id })
+    .populate({ path: "given_by" })
+    .populate({ path: "given_to" })
+    .then((transactions) => {
+      res.json({ transactions });
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
+};
+
+const fetchRewards: ControllerFunction = async (req, res) => {
+  const id = req.params.id;
+  RewardHistory.find({ given_to: id })
+    .populate({ path: "given_by" })
+    .populate({ path: "given_to" })
+    .then((transactions) => {
+      res.json({ transactions });
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
+};
+
+const userController = { create, update, list, index, fetchP5, fetchRewards };
 
 export { userController };
